@@ -30,6 +30,8 @@ class Visualizer:
                     cv2.circle(frame, (indexX, indexY), 10, (0, 255, 255), 2)
         
         elif state == "HANDSUP":
+            if not vizualData.get("headZone"):
+                return frame
             headZone = vizualData["headZone"]
             zoneYMax = int(headZone["yMax"] * height)
             cv2.rectangle(frame, (0, 0), (width, zoneYMax), (0, 255, 0), 3)
@@ -45,6 +47,9 @@ class Visualizer:
                     cv2.line(frame, (wristX, wristY), (indexX, indexY), (128, 0, 128), 2)
         
         else:
+            if not vizualData.get("headZone"):
+                return frame
+            
             headZone = vizualData["headZone"]
             zoneYMax = int(headZone["yMax"] * height)
             cv2.line(frame, (0, zoneYMax), (width, zoneYMax), (100, 100, 100), 1)
@@ -53,7 +58,7 @@ class Visualizer:
             if vizualData["mouthZone"]:
                 mouthZone = vizualData["mouthZone"]
                 xMin = int(mouthZone["xMin"] * width)
-                xMax = int(mouthZone["yMax"] * width)
+                xMax = int(mouthZone["xMax"] * width)
                 yMin = int(mouthZone["yMin"] * height)
                 yMax = int(mouthZone["yMax"] * height)
 

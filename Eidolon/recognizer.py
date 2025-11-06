@@ -3,17 +3,12 @@ import mediapipe as mp
 
 class ExpressionRecognizer:
     def __init__(self, smileThreshold = 0.35):
-        self.mpPose = mp.solutions.pose
         self.mpFaceMesh = mp.solutions.face_mesh
         self.mpHands = mp.solutions.hands
         self.smileThreshold = smileThreshold
         self.headZone = {"yMin": 0.0, "yMax": 0.35}
         self.mouthZoneSize = 0.15
 
-        self.pose = self.mpPose.Pose(
-            min_detection_confidence = 0.5,
-            min_tracking_confidence = 0.5
-        )
         self.faceMesh = self.mpFaceMesh.FaceMesh(
             min_detection_confidence = 0.5,
             min_tracking_confidence = 0.5
@@ -201,6 +196,5 @@ class ExpressionRecognizer:
         return state, vizualData
     
     def release(self):
-        self.pose.close()
         self.faceMesh.close()
         self.hands.close()

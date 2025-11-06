@@ -76,10 +76,10 @@ def main():
             imageRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             imageRGB.flags.writeable = False
 
-            currentState, vizualData = recognizer.getState(imageRGB)
+            currentState, visualData = recognizer.getState(imageRGB)
             pibbleToShow, pibbleName = getPibbleForState(currentState, pibbleImages)
             cameraFrameResized = cv2.resize(frame, (config.WINDOWWIDTH, config.WINDOWHEIGHT))
-            cameraFrameResized = visualizer.drawDetectionBoxes(cameraFrameResized, currentState, vizualData)
+            cameraFrameResized = visualizer.drawDetectionBoxes(cameraFrameResized, currentState, visualData)
             cameraFrameResized = visualizer.addUiElements(cameraFrameResized, pibbleName)
             cv2.imshow("Eidolon Feed", cameraFrameResized)
             cv2.imshow("Pibble Output", pibbleToShow)
